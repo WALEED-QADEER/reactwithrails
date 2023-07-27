@@ -1,6 +1,12 @@
 .App {
-  text-align: center;
+  text-align: left;
 }
+
+table{
+  border: 3px solid black;
+}
+
+
 
 .App-logo {
   height: 40vmin;
