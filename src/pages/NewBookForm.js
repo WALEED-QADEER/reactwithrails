@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 const NewBookForm = () => {
@@ -6,6 +7,8 @@ const NewBookForm = () => {
     name: ''
     // Add more fields as needed
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,7 +29,7 @@ const NewBookForm = () => {
         <input type="text" name="name" value={book.name} onChange={handleChange} />
       </label>
         
-      <button type="submit">Create Book</button>
+      <button type="submit" onClick={() => navigate(-1)}>Create Book</button>
     </form>
   );
 };

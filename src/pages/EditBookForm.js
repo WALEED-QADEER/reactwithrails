@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const EditBookForm = (props) => {
   const [book, setBook] = useState({
@@ -6,15 +7,17 @@ const EditBookForm = (props) => {
     // Add more fields as needed
   });
  
+  const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
    
     // Fetch the book data for editing when the component mounts
-    fetch(`http://127.0.0.1:3000/books/${props.id}`)
+    fetch(`http://127.0.0.1:3000/books/${id}`)
       .then((response) => response.json())
       .then((data) => setBook(data))
       .catch((error) => console.error('Error fetching book:', error));
-  }, [props.id]);
+  }, [id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,7 +31,7 @@ const EditBookForm = (props) => {
   };
 
   const updateBook = (bookData) => {
-    fetch(`http://127.0.0.1:3000/books/${props.id}`, {
+    fetch(`http://127.0.0.1:3000/books/${id}`, {
       method: 'PATCH', // Use 'PUT' if your API expects PUT requests for updates
       headers: {
         'Content-Type': 'application/json',
@@ -53,7 +56,7 @@ const EditBookForm = (props) => {
         <input type="text" name="name" value={book.name} onChange={handleChange} />
       </label>
       
-      <button type="submit">Update Book</button>
+      <button type="submit" onClick={() => navigate(-1)}>Update Book</button>
     </form>
   );
 };

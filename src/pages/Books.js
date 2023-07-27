@@ -1,8 +1,6 @@
-import NewBookForm from "./NewBookForm";
+
 import DeleteButton from "./DeleteButton";
-import EditBookForm from './EditBookForm';
-
-
+import { Link } from "react-router-dom";
 
 function Book(props) {
     
@@ -24,10 +22,15 @@ function Book(props) {
         {props.books.map((book) =>  
         <tr key={book.id}>        
             <td>
+            <Link to={`/show/${book.id}`}>
             {book.name}
+            </Link>
+           
             </td> 
             <td>
-            <EditBookForm id = {book.id} />
+            <Link to={`/edit/${book.id}`}>
+                        Edit
+            </Link>
             </td>
             <td>
             <DeleteButton id={book.id} />   
@@ -36,7 +39,9 @@ function Book(props) {
            )} 
     </table>
     
-    <NewBookForm />
+    <Link to={`/addBook`}>
+                        ADD New Book
+            </Link>
     </div>
      
     );
